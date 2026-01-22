@@ -1,111 +1,74 @@
 * {
-  min-height: 0;
-  min-width: 0;
-  font-family: Lexend, "JetBrainsMono NFP";
-  font-size: 16px;
-  font-weight: 500;
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 12px;
+  color: rgba(235, 235, 235, 0.9);
 }
 
-/* ===== BAR ===== */
 window#waybar {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.04)
-  );
+  background: rgba(18, 18, 18, 0.35);
   border-radius: 16px;
-  padding: 6px 16px;
-
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* ===== WORKSPACES ===== */
+/* WORKSPACES */
 #workspaces button {
-  padding: 0.35rem 0.75rem;
-  margin: 0.3rem 0.25rem;
-  border-radius: 9px;
-
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-
-  color: #cdd6f4;
-  transition: background-color 0.2s ease;
-}
-
-#workspaces button:hover {
-  background: rgba(255, 255, 255, 0.14);
+  padding: 0 8px;
+  margin: 4px 2px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(220, 220, 220, 0.6);
 }
 
 #workspaces button.active {
-  background: rgba(255, 255, 255, 0.22);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.95);
 }
 
-#workspaces button.urgent {
-  color: #f38ba8;
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
 
-/* ===== MODULES ===== */
+/* GLASS MODULE BASE */
 #clock,
+#battery,
+#network,
+#bluetooth,
 #pulseaudio,
-#custom-logo,
-#custom-power,
-#custom-spotify,
-#custom-notification,
-#cpu,
+#backlight,
 #tray,
-#memory,
-#window,
+#custom-temperature,
+#custom-memory,
 #mpris {
-  padding: 0.35rem 0.75rem;
-  margin: 0.3rem 0.25rem;
-  border-radius: 9px;
+  padding: 0 10px;
+  margin: 4px 3px;
+  border-radius: 12px;
 
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  /* Glass */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.04)
+  );
 
-  color: #cdd6f4;
+  /* Reflection edges */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+    0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-/* ===== SUBTLE ACCENTS ===== */
-#clock {
-  color: #b4befe;
+/* MPRIS a bit more premium */
+#mpris {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
-#custom-logo {
-  color: #89b4fa;
-}
-
-#custom-power {
-  color: #f38ba8;
-}
-
-#mpris.playing {
-  color: #a6e3a1;
-}
-
-#mpris.paused,
-#pulseaudio.muted {
-  color: #a6adc8;
-}
-
-/* ===== SEPARATOR ===== */
-#custom-sep {
-  padding: 0;
-  color: rgba(205, 214, 244, 0.25);
-}
-
-/* ===== EMPTY WINDOW TITLE ===== */
-window#waybar.empty #window {
+/* Tray stays invisible */
+#tray {
   background: transparent;
   border: none;
-}
-
-/* ===== TOOLTIP ===== */
-tooltip {
-  background: rgba(255, 255, 255, 0.22);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #cdd6f4;
+  box-shadow: none;
 }
