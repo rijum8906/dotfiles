@@ -6,7 +6,7 @@
   "passthrough": false,
   "gtk-layer-shell": true,
   "height": 40,
-  "width": 1720,
+  "width": 1590,
 
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
 
@@ -81,7 +81,7 @@
     "format-wifi": " {signalStrength}%",
     "format-ethernet": "󰈀",
     "format-disconnected": "󰖪",
-    "on-click": "nm-connection-editor",
+    "on-click": "networkmanager_dmenu",
     "on-click-right": "alacritty -e nmtui",
   },
 
