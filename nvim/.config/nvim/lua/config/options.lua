@@ -3,3 +3,5 @@
 -- Add any additional options here
 
 vim.opt.mouse = ""
+vim.opt.swapfile = true
+vim.opt.directory = vim.fn.stdpath("state") .. "/swap//"
