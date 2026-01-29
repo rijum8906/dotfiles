@@ -1,7 +1,8 @@
 # ---- PATH ----
 export PATH=$PATH:/home/rijum/.local/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
-eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/base.json)"
 eval "$(zoxide init zsh)"
 
 
@@ -10,3 +11,9 @@ source "$HOME/.config/zsh/alias.zsh"
 source "$HOME/.config/zsh/zinit.zsh"
 source "$HOME/.config/zsh/yazi.zsh"
 
+# History
+# ---- History Configuration ----
+HISTFILE=~/.zsh_history     # The file where history is saved
+HISTSIZE=10000              # How many lines to keep in active memory
+SAVEHIST=10000              # How many lines to save in the file
+setopt APPEND_HISTORY       # Append to the file rather than overwriting
