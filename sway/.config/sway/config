@@ -126,3 +126,10 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 ### -------------------------
 exec waybar
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+
+# Handle lid close: Suspend the system
+bindswitch --locked lid:on exec systemctl suspend
+
+# Optional: If you want to lock the screen first
+# bindswitch --locked lid:on exec swaylock && systemctl suspend
