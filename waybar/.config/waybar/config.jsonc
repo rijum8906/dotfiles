@@ -1,0 +1,147 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 18, // Shorter height for a sleeker look
+  "spacing": 4,
+  "modules-left": [
+    "battery",
+    "custom/power-mode",
+    "temperature",
+    "memory",
+    "cpu"
+  ],
+  "modules-center": [
+    "group/music",
+    "sway/workspaces",
+    "clock#middle"
+  ],
+  "modules-right": [
+    "backlight",
+    "pulseaudio",
+    "network",
+    "bluetooth",
+    "custom/power"
+  ],
+  // --- LEFT ---
+  "battery": {
+    "states": {
+      "high": 100,
+      "medium": 60,
+      "low": 30
+    },
+    "format": "{icon}  {capacity}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "interval": 5,
+    "on-click": "~/.config/waybar/scripts/power-mode.sh showPowerModePanel"
+  },
+  "custom/power-mode": {
+    "exec": "~/.config/waybar/scripts/power-mode.sh getPowerMode",
+    "interval": 5,
+    "format": "󰓅",
+    "tooltip": true,
+    "tooltip-format": "Power mode: {}",
+    "on-click": "~/.config/waybar/scripts/power-mode.sh showPowerModePanel"
+  },
+  "temperature": {
+    "format": " {temperatureC}°C"
+  },
+  "memory": {
+    "states": {
+      "warning": 60,
+      "critical": 90
+    },
+    "format": " {percentage}%",
+    "tooltip-format": "{used:0.1f}GB Used",
+    "on-click": "plasma-systemmonitor"
+  },
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": true,
+    "on-click": "plasma-systemmonitor"
+  },
+  // --- MIDDLE  ---
+  "group/music": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/prev",
+      "custom/playpause",
+      "custom/next"
+    ]
+  },
+  "custom/prev": {
+    "format": " 󰒮 ",
+    "interval": 1,
+    "exec": "~/.config/waybar/scripts/music.sh getMusicInfo",
+    "tooltip-format": "{}",
+    "on-click-right": "~/.config/waybar/scripts/music.sh openMusicSource",
+    "on-click": "playerctl previous"
+  },
+  "custom/playpause": {
+    "exec": "~/.config/waybar/scripts/music.sh showMusicStatusIcon",
+    "interval": 1,
+    "format": " {} ",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "~/.config/waybar/scripts/music.sh openMusicSource"
+  },
+  "custom/next": {
+    "format": " 󰒭 ",
+    "interval": 1,
+    "exec": "~/.config/waybar/scripts/music.sh getMusicInfo",
+    "tooltip-format": "{}",
+    "on-click-right": "~/.config/waybar/scripts/music.sh openMusicSource",
+    "on-click": "playerctl next"
+  },
+  "sway/workspaces": {
+    "format": "{name}",
+    "all-outputs": true
+  },
+  "clock#middle": {
+    "format": "  {:%H:%M}"
+  },
+  // --- RIGHT ---
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      ""
+    ],
+    "on-scroll-up": "brightnessctl set +1%",
+    "on-scroll-down": "brightnessctl set 1%-"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "󰋋 {volume}%",
+    "format-muted": "󰝟",
+    "format-icons": {
+      "headphone": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-scroll-up": "pamixer -i 1",
+    "on-scroll-down": "pamixer -d 1"
+  },
+  "network": {
+    "format-wifi": " ",
+    "format-disconnected": "󰖪 ",
+    "tooltip-format": "{essid} ({signalStrength}%)",
+    "on-click": "~/.config/waybar/scripts/network-menu.sh"
+  },
+  "bluetooth": {
+    "format": " ",
+    "format-connected": " {num_connections}",
+    "tooltip-format": "{device_alias}",
+    "on-click": "~/.config/waybar/scripts/bluetooth.sh"
+  },
+  "custom/power": {
+    "format": " ",
+    "on-click": "swaymsg exit"
+  }
+}

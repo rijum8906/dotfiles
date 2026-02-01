@@ -1,0 +1,57 @@
+* {
+    border: none;
+    font-family: "JetBrains Mono Nerd Font";
+    font-size: 12px; /* Smaller overall font */
+}
+
+window#waybar {
+    background: rgba(15, 15, 15, 0.45);
+    color: #ffffff;
+}
+
+#battery, #custom-power-mode, #temperature, #memory, #cpu, #workspaces, 
+#backlight, #pulseaudio, #network, #bluetooth, #custom-power, 
+#clock, .modules-center, .modules-left, .modules-right, #music {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1px 8px;
+    margin: 3px 2px;
+}
+
+/* --- Music Controller (Bigger Icons) --- */
+#custom-prev, #custom-playpause, #custom-next {
+    font-size: 16px; /* Larger icons for media */
+    padding: 0 5px;
+    color: #89b4fa;
+}
+
+/* --- Battery Color Logic --- */
+#battery.high { color: #a6e3a1; }     /* Green > 50% */
+#battery.medium { color: #f9e2af; }   /* Yellow 21-50% */
+#battery.low { color: #f38ba8; }      /* Red < 20% */
+
+/* --- Memory & CPU Logic --- */
+#memory { color: #89b4fa; } /* Base Blue */
+#memory.warning { color: #f9e2af; }
+#memory.critical { color: #f38ba8; }
+
+#cpu { color: #cba6f7; }
+#cpu.warning { color: #f9e2af; }
+#cpu.critical { color: #f38ba8; }
+
+/* --- Workspace Highlight --- */
+#workspaces button {
+    color: rgba(255, 255, 255, 0.3);
+    padding: 0 4px;
+}
+#workspaces button.focused {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 -2px #ffffff;
+}
+
+/* Hover Glow */
+#network:hover, #bluetooth:hover, #custom-power:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
