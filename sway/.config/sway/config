@@ -1,0 +1,128 @@
+### -------------------------
+### Basics & Apps
+### -------------------------
+set $mod   Mod4
+set $term  kitty
+set $menu  wofi --show drun
+set $browser google-chrome-stable
+set $file_manager thunar
+
+### -------------------------
+### Input & Output
+### -------------------------
+input "type:touchpad" {
+    tap enabled
+    dwt enabled
+}
+
+output * bg ~/Downloads/devil-heart-5120x2880-25267.png fill
+
+output eDP-1 {
+    scale 2
+    scale_filter smart
+}
+
+# Fix scaling for XWayland/VLC
+for_window [shell="xwayland"] scale 1
+for_window [app_id="vlc"] scale 1
+
+# Make portal file pickers float and set a reasonable size
+for_window [title="(?i)Open File"] floating enable, resize set 800 600, move position center
+for_window [title="(?i)Save File"] floating enable, resize set 800 600, move position center
+for_window [title="(?i)Select a File"] floating enable, resize set 800 600, move position center
+for_window [app_id="xdg-desktop-portal-gtk"] floating enable, resize set 800 600, move position center
+
+### -------------------------
+### Keybindings (Updated for Space & V)
+### -------------------------
+bindsym $mod+Return  exec $term
+bindsym $mod+t       exec $term
+
+# Launcher (Requested: Space for wofi)
+bindsym $mod+space   exec $menu
+
+# Window Management
+bindsym $mod+q       kill
+
+# File Manager & Browser
+bindsym $mod+e       exec $file_manager
+bindsym $mod+b       exec $browser
+
+# Exit Logic
+bindsym $mod+Shift+q exec swaynag -t warning -m 'Exit Sway?' -b 'Yes' 'swaymsg exit'
+bindsym $mod+Ctrl+q  exec "swaymsg exit"
+
+# System Control
+bindsym $mod+Shift+c reload
+
+### -------------------------
+### Navigation (Vim Keys)
+### -------------------------
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+### -------------------------
+### Workspaces
+### -------------------------
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+
+### -------------------------
+### Layout & Floating (Updated: V for floating)
+### -------------------------
+bindsym $mod+f       fullscreen toggle
+bindsym $mod+s       layout stacking
+bindsym $mod+w       layout tabbed
+
+# Floating Toggles
+bindsym $mod+v       floating toggle
+bindsym $mod+Shift+v focus mode_toggle
+
+# Borders (Minimal but visible)
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders smart
+
+# Colors (Clean Dark Theme)
+client.focused          #89b4fa #1e1e2e #ffffff #89b4fa #89b4fa
+client.unfocused        #313244 #1e1e2e #cdd6f4 #313244 #313244
+client.focused_inactive #45475a #1e1e2e #cdd6f4 #45475a #45475a
+client.urgent           #f38ba8 #1e1e2e #ffffff #f38ba8 #f38ba8
+
+### -------------------------
+### Media Keys
+### -------------------------
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+### -------------------------
+### Autostart
+### -------------------------
+exec waybar
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
