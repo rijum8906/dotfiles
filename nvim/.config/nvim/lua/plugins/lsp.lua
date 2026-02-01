@@ -27,6 +27,17 @@ return {
             },
           },
         },
+        html = {
+          -- This enables the server to recognize CSS and JS inside HTML
+          filetypes = { "html", "htmldjango" },
+          init_options = {
+            configurationSection = { "html", "css", "javascript" },
+            embeddedLanguages = {
+              css = true,
+              javascript = true,
+            },
+          },
+        },
       },
     },
   },
