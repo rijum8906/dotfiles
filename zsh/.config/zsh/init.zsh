@@ -10,6 +10,7 @@ eval "$(zoxide init zsh)"
 source "$HOME/.config/zsh/alias.zsh"
 source "$HOME/.config/zsh/zinit.zsh"
 source "$HOME/.config/zsh/yazi.zsh"
+source "$HOME/.config/zsh/sway.zsh"
 
 # History
 # ---- History Configuration ----

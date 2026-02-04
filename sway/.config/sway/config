@@ -1,63 +1,90 @@
 ### -------------------------
-### Basics & Apps
+### Variables & Apps
 ### -------------------------
-set $mod   Mod4
-set $term  kitty
-set $menu  wofi --show drun
-set $browser google-chrome-stable
+set $mod      Mod4
+set $term     kitty
+set $menu     wofi --show drun
+set $browser  google-chrome-stable
 set $file_manager thunar
+
+### Catppuccin Mocha Color Palette
+set $rosewater #f5e0dc
+set $flamingo  #f2cdcd
+set $pink      #f5c2e7
+set $mauve     #cba6f7
+set $red       #f38ba8
+set $maroon    #eba0ac
+set $peach     #fab387
+set $yellow    #f9e2af
+set $green     #a6e3a1
+set $teal      #94e2d5
+set $sky       #89dceb
+set $sapphire  #74c7ec
+set $blue      #89b4fa
+set $lavender  #b4befe
+set $text      #cdd6f4
+set $subtext1  #bac2de
+set $subtext0  #a6adc8
+set $overlay2  #9399b2
+set $overlay1  #7f849c
+set $overlay0  #6c7086
+set $surface2  #585b70
+set $surface1  #45475a
+set $surface0  #313244
+set $base      #1e1e2e
+set $mantle    #181825
+set $crust     #11111b
+
+### -------------------------
+### Appearance & Window Decor
+### -------------------------
+# Target                Border     BG       Text    Indicator  Child_Border
+client.focused          $blue      $base    $text   $rosewater $blue
+client.focused_inactive $overlay0  $base    $text   $overlay0  $overlay0
+client.unfocused        $overlay0  $base    $text   $overlay0  $overlay0
+client.urgent           $red       $base    $red    $peach     $red
+
+smart_borders on
+default_border pixel 2
+default_floating_border pixel 2
 
 ### -------------------------
 ### Input & Output
 ### -------------------------
+output * bg ~/Downloads/devil-heart-5120x2880-25267.png fill
+
+output eDP-1 {
+    scale 1.8
+    scale_filter smart
+}
+
 input "type:touchpad" {
     tap enabled
     dwt enabled
 }
 
-output * bg ~/Downloads/devil-heart-5120x2880-25267.png fill
-
-output eDP-1 {
-    scale 2
-    scale_filter smart
-}
-
-# Fix scaling for XWayland/VLC
-for_window [shell="xwayland"] scale 1
-for_window [app_id="vlc"] scale 1
-
-# Make portal file pickers float and set a reasonable size
-for_window [title="(?i)Open File"] floating enable, resize set 800 600, move position center
-for_window [title="(?i)Save File"] floating enable, resize set 800 600, move position center
-for_window [title="(?i)Select a File"] floating enable, resize set 800 600, move position center
-for_window [app_id="xdg-desktop-portal-gtk"] floating enable, resize set 800 600, move position center
+### -------------------------
+### Logic & Bug Fixes
+### -------------------------
+# Fix scaling for XWayland
+for_window [shell="xwayland"] scale 1.8
+for_window [window_role="GtkFileChooserDialog"] floating enable, resize set 900 600, move position center
+for_window [window_role="pop-up"] floating enable, resize set 900 600, move position center
+for_window [app_id="xdg-desktop-portal-gtk"] floating enable, resize set 900 600, move position center
+for_window [title="(?i)(?:Open|Save|Select)\b.*File"] floating enable, resize set 900 600, move position center
 
 ### -------------------------
-### Keybindings (Updated for Space & V)
+### Keybindings
 ### -------------------------
 bindsym $mod+Return  exec $term
-bindsym $mod+t       exec $term
-
-# Launcher (Requested: Space for wofi)
 bindsym $mod+space   exec $menu
-
-# Window Management
 bindsym $mod+q       kill
-
-# File Manager & Browser
+bindsym $mod+Shift+c reload
 bindsym $mod+e       exec $file_manager
+bindsym $mod+t       exec $term
 bindsym $mod+b       exec $browser
 
-# Exit Logic
-bindsym $mod+Shift+q exec swaynag -t warning -m 'Exit Sway?' -b 'Yes' 'swaymsg exit'
-bindsym $mod+Ctrl+q  exec "swaymsg exit"
-
-# System Control
-bindsym $mod+Shift+c reload
-
-### -------------------------
-### Navigation (Vim Keys)
-### -------------------------
+# Navigation (Vim Keys)
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -68,68 +95,52 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-### -------------------------
-### Workspaces
-### -------------------------
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
+# Workspaces
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
 
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
 
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-
-### -------------------------
-### Layout & Floating (Updated: V for floating)
-### -------------------------
+# Layout & Floating
 bindsym $mod+f       fullscreen toggle
+bindsym $mod+v       floating toggle
+bindsym $mod+Shift+v focus mode_toggle
 bindsym $mod+s       layout stacking
 bindsym $mod+w       layout tabbed
 
-# Floating Toggles
-bindsym $mod+v       floating toggle
-bindsym $mod+Shift+v focus mode_toggle
+# Screenshots (Save + Copy)
+bindsym Print            exec grim - | tee ~/Pictures/Screenshots/$(date +%F-%T).png | wl-copy
+bindsym Shift+Print      exec grim -g "$(slurp)" - | tee ~/Pictures/Screenshots/$(date +%F-%T).png | wl-copy
+bindsym Ctrl+Shift+Print exec grim -g "$(slurp)" - | wl-copy
 
-# Borders (Minimal but visible)
-default_border pixel 2
-default_floating_border pixel 2
-hide_edge_borders smart
-
-# Colors (Clean Dark Theme)
-client.focused          #89b4fa #1e1e2e #ffffff #89b4fa #89b4fa
-client.unfocused        #313244 #1e1e2e #cdd6f4 #313244 #313244
-client.focused_inactive #45475a #1e1e2e #cdd6f4 #45475a #45475a
-client.urgent           #f38ba8 #1e1e2e #ffffff #f38ba8 #f38ba8
-
-### -------------------------
-### Media Keys
-### -------------------------
+# Media Keys
 bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
 bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-
 bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
 ### -------------------------
 ### Autostart
 ### -------------------------
-exec waybar
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec {
+    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+    waybar
+}
+exec {
+    # Tell all apps (including Chrome/Gemini) to prefer dark mode
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    
+    # Sync these settings to the D-Bus environment
+    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+}
 
-
-# Handle lid close: Suspend the system
+# Handle lid close
 bindswitch --locked lid:on exec systemctl suspend
-
-# Optional: If you want to lock the screen first
-# bindswitch --locked lid:on exec swaylock && systemctl suspend
