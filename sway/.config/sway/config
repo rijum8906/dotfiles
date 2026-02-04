@@ -133,6 +133,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 exec {
     dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
     waybar
+    mpris-proxy
 }
 exec {
     # Tell all apps (including Chrome/Gemini) to prefer dark mode
