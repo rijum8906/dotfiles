@@ -1,57 +1,114 @@
 * {
-    border: none;
-    font-family: "JetBrains Mono Nerd Font";
-    font-size: 12px; /* Smaller overall font */
+  border: none;
+  font-family: "JetBrains Mono Nerd Font";
+  font-size: 12px;
 }
 
 window#waybar {
-    background: rgba(15, 15, 15, 0.45);
-    color: #ffffff;
+  /* Kept your original glass background */
+  background: rgba(15, 15, 15, 0.45);
+  color: #ffffff;
 }
 
-#battery, #custom-power-mode, #temperature, #memory, #cpu, #workspaces, 
-#backlight, #pulseaudio, #network, #bluetooth, #custom-power, 
-#clock, .modules-center, .modules-left, .modules-right, #music {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 1px 8px;
-    margin: 3px 2px;
+#battery,
+#custom-power-mode,
+#temperature,
+#memory,
+#cpu,
+#workspaces,
+#backlight,
+#pulseaudio,
+#network,
+#bluetooth,
+#custom-power,
+#clock,
+.modules-center,
+.modules-left,
+.modules-right,
+#music {
+  /* Kept your frosted glass effect and solid white borders */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 1px 8px;
+  margin: 3px 2px;
 }
 
-/* --- Music Controller (Bigger Icons) --- */
-#custom-prev, #custom-playpause, #custom-next {
-    font-size: 16px; /* Larger icons for media */
-    padding: 0 5px;
-    color: #89b4fa;
+/* --- Music Controller --- */
+#custom-prev,
+#custom-playpause,
+#custom-next {
+  font-size: 16px;
+  padding: 0 5px;
+  color: #89b4fa;
+  /* Catppuccin Blue for music accents */
+}
+
+/* --- Workspace Highlight (Fixed for Hyprland) --- */
+#workspaces button {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0 4px;
+}
+
+/* Changed .focused to .active to match Hyprland's module */
+#workspaces button.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 -2px #ffffff;
+}
+
+/* Shows workspaces with open windows */
+#workspaces button.visible {
+  color: rgba(255, 255, 255, 1);
 }
 
 /* --- Battery Color Logic --- */
-#battery.high { color: #a6e3a1; }     /* Green > 50% */
-#battery.medium { color: #f9e2af; }   /* Yellow 21-50% */
-#battery.low { color: #f38ba8; }      /* Red < 20% */
+#battery.high {
+  color: #a6e3a1;
+}
+
+#battery.medium {
+  color: #f9e2af;
+}
+
+#battery.low {
+  color: #f38ba8;
+}
 
 /* --- Memory & CPU Logic --- */
-#memory { color: #89b4fa; } /* Base Blue */
-#memory.warning { color: #f9e2af; }
-#memory.critical { color: #f38ba8; }
-
-#cpu { color: #cba6f7; }
-#cpu.warning { color: #f9e2af; }
-#cpu.critical { color: #f38ba8; }
-
-/* --- Workspace Highlight --- */
-#workspaces button {
-    color: rgba(255, 255, 255, 0.3);
-    padding: 0 4px;
-}
-#workspaces button.focused {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.12);
-    box-shadow: inset 0 -2px #ffffff;
+#memory {
+  color: #89b4fa;
 }
 
-/* Hover Glow */
-#network:hover, #bluetooth:hover, #custom-power:hover {
-    background: rgba(255, 255, 255, 0.2);
+#memory.warning {
+  color: #f9e2af;
+}
+
+#memory.critical {
+  color: #f38ba8;
+}
+
+#cpu {
+  color: #cba6f7;
+}
+
+#cpu.warning {
+  color: #f9e2af;
+}
+
+#cpu.critical {
+  color: #f38ba8;
+}
+
+/* Hover Glow (Glass effect) */
+#network:hover,
+#bluetooth:hover,
+#custom-power:hover,
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#custom-power {
+  color: #f38ba8;
 }

@@ -2,6 +2,7 @@
 export PATH=$PATH:/home/rijum/.local/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export PATH="$HOME/.cargo/bin:$PATH"
 
 eval "$(zoxide init zsh)"
 

@@ -12,7 +12,7 @@
   ],
   "modules-center": [
     "group/music",
-    "sway/workspaces",
+    "hyprland/workspaces",
     "clock#middle"
   ],
   "modules-right": [
@@ -97,7 +97,7 @@
     "on-click-right": "~/.config/waybar/scripts/music.sh openMusicSource",
     "on-click": "playerctl next"
   },
-  "sway/workspaces": {
+  "hyprland/workspaces": {
     "format": "{name}",
     "all-outputs": true
   },
@@ -142,6 +142,6 @@
   },
   "custom/power": {
     "format": " ",
-    "on-click": "swaymsg exit"
+    "on-click": "hyprctl dispatch exit"
   }
 }
