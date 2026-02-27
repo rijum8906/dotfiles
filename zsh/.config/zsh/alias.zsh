@@ -10,4 +10,3 @@ alias tree='eza --tree --icons'
 
 # cat replacement
 alias cat='bat'
-
